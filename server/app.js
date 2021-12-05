@@ -7,14 +7,8 @@ const mysql = require('mysql');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-<<<<<<< HEAD
 var privateKey  = fs.readFileSync(__dirname + '/key.pem', 'utf8');
 var certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf8');
-=======
-//var privateKey  = fs.readFileSync(path.resolve('server/key.pem', 'utf8'));
-var privateKey  = fs.readFileSync(__dirname+'/key.pem', 'utf8');
-var certificate = fs.readFileSync(__dirname+'/cert.pem', 'utf8');
->>>>>>> 23d027d8ad944d35a07b0d287fbb2cac3e0c978a
 var credentials = {key: privateKey, cert: certificate};
 const app = express();
 
@@ -28,14 +22,9 @@ var httpsServer = https.createServer(credentials, app);
 //app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 const db = mysql.createConnection({
-<<<<<<< HEAD
     host: '172.29.64.1',
     port: '3306',
     user: 'phatt',
-=======
-    host: '172.25.240.1',
-    user: 'bonn',
->>>>>>> 23d027d8ad944d35a07b0d287fbb2cac3e0c978a
     password: '1234',
     database: 'database_lab'
 });
