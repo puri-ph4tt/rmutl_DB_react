@@ -81,9 +81,9 @@ export default class Facebook extends Component {
             backgroundImage: 'linear-gradient(45deg, rgba(218, 132, 230, 0.84) 0%, rgba(179, 0, 89, 1) 83%)'
           }}
         >
-          <img src={JSON.parse(localStorage.getItem('user')).picture.data.url} alt />
-          <h2>Welcome {" "}{JSON.parse(localStorage.getItem('user')).name}</h2>
- 	        email: {JSON.parse(localStorage.getItem('user')).email}
+          <img src={this.state.picture} alt={this.state.name} />
+          <h2>Welcome {this.state.name}</h2>
+ 	  email: {this.state.email}
           <div className="my-3"><a className="btn btn-danger" href="/" onClick={this.logoutFacebook}>Logout</a></div>
           <BrowserRouter>
             <br /><br /><div className="btn-group btn-group-lg"><ButtonRegister /><ButtonShowdata /></div>

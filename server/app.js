@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const body = require('body-parser');
+
 //const app = express();
 const mysql = require('mysql');
 
@@ -8,8 +9,8 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var privateKey  = fs.readFileSync(__dirname + '/key.pem', 'utf8');
-var certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf8');
+var privateKey  = fs.readFileSync('/etc/letsencrypt/live/puriphatdbmslab.ddns.net/privkey.pem', 'utf8');
+var certificate = fs.readFileSync('/etc/letsencrypt/live/puriphatdbmslab.ddns.net/fullchain.pem', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 const app = express();
@@ -20,7 +21,7 @@ app.use(body());
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 const db = mysql.createConnection({
-    host: '172.29.64.1',
+    host: '127.0.0.1',
     user: 'phatt',
     password: '1234',
     database: 'database_lab'
@@ -49,7 +50,7 @@ app.put('/delete', function(req, res) {
 
 //edit
 app.put('/data', function(req, res) {
-    var sql = 'UPDATE students SET firstname= ? , lastname = ? WHERE id = ?';
+    var sql = 'UPDATE students SET firstname = ? , lastname = ? WHERE id = ?';
     db.query(sql,[req.body.firstname,req.body.lastname,req.body.idkey],function (error, results) {
         if(error) throw error;
         res.send(JSON.stringify(results));
