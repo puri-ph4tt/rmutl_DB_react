@@ -102,6 +102,7 @@ export default class Showdata extends Component{
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+			    <th>Register time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,6 +112,7 @@ export default class Showdata extends Component{
                                             <td>{user.id}</td>
                                             <td>{user.firstname}</td>
                                             <td>{user.lastname}</td>
+					    <td>{user.regis_time}</td>
                                             <td><button type="button" class="btn btn-warning" onClick={()=>this.call(user)}>Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"  onClick={()=>this.onDelete(user)}>Delete</button></td>
                                             <div className="box">
