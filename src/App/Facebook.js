@@ -29,6 +29,7 @@ export default class Facebook extends Component {
     localStorage.setItem('name', response.name);
     localStorage.setItem('email', response.email);
     localStorage.setItem('picture', response.picture.data.url);
+    sessionStorage.setItem('addby', response.email);
   }
 
   getLocalStorageLogin = () => {
@@ -58,6 +59,7 @@ export default class Facebook extends Component {
     localStorage.setItem('name', '');
     localStorage.setItem('email', '');
     localStorage.setItem('picture', '');
+    sessionStorage.removeItem('addby');
   }
 
   render() {

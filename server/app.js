@@ -66,7 +66,8 @@ app.post('/data', function(req, res){
     let data = {
         id:req.body.idkey,
         firstname:req.body.firstname,
-        lastname:req.body.lastname
+        lastname:req.body.lastname,
+        addby:req.body.addby
     };
     let sql = 'INSERT INTO users SET ?';
     db.query(sql, data, (err, result)=>{
@@ -79,7 +80,6 @@ app.post('/data', function(req, res){
         }
     });
 });
-
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));

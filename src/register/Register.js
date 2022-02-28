@@ -8,7 +8,7 @@ export default class Register extends Component{
         this.state = {
             idkey:"",
             firstname:"",
-            lastname:""
+            lastname:"",
         }
         this.handleChang = this.handleChang.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
@@ -23,13 +23,14 @@ export default class Register extends Component{
         let data = {
             idkey:this.state.idkey,
             firstname:this.state.firstname,
-            lastname:this.state.lastname
+            lastname:this.state.lastname,
+            addby:sessionStorage.getItem('addby')
         }
         axios.post(url,data)
         this.setState({
             idkey:"",
             firstname:"",
-            lastname:""
+            lastname:"",
         });
         window.location='https://localhost:3000/Showdata';
     }

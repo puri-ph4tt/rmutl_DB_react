@@ -56,7 +56,8 @@ export default class Showdata extends Component{
         this.setState({
             idkey:user.id,
             firstname:user.firstname,
-            lastname:user.lastname
+            lastname:user.lastname,
+            addby:user.addby
         })
     }
     handleChang = (e) => {
@@ -67,7 +68,8 @@ export default class Showdata extends Component{
         let data = {
             idkey:this.state.idkey,
             firstname:this.state.firstname,
-            lastname:this.state.lastname
+            lastname:this.state.lastname,
+            addby:this.state.addby
         }
         axios.put(url,data)
     }
@@ -77,13 +79,15 @@ export default class Showdata extends Component{
         let data = {
             idkey:this.state.idkey,
             firstname:this.state.firstname,
-            lastname:this.state.lastname
+            lastname:this.state.lastname,
+            addby:this.state.addby
         }
         axios.put(url,data)
         this.setState({
             idkey:"",
             firstname:"",
-            lastname:""
+            lastname:"",
+            addby:""
         });
 	this.closeModal();
         setTimeout(()=>{this.componentDidMount()},1)
@@ -102,6 +106,7 @@ export default class Showdata extends Component{
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Add by</th>
                             <th>Register time</th>
                             <th colspan="2">Action</th>
                             </tr>
@@ -113,9 +118,10 @@ export default class Showdata extends Component{
                                             <td>{user.id}</td>
                                             <td>{user.firstname}</td>
                                             <td>{user.lastname}</td>
+                                            <td>{user.addby}</td>
                                             <td>{user.regis_time}</td>
-                                            <td width="15%"><button type="button" class="btn btn-warning btn-block" onClick={()=>this.call(user)}>Edit</button></td>
-                                            <td width="15%"><button type="button" class="btn btn-danger btn-block"  onClick={()=>this.onDelete(user)}>Delete</button></td>
+                                            <td width="10%"><button type="button" class="btn btn-warning btn-block" onClick={()=>this.call(user)}>Edit</button></td>
+                                            <td width="10%"><button type="button" class="btn btn-danger btn-block"  onClick={()=>this.onDelete(user)}>Delete</button></td>
                                             <div className="box">
                                                 <Modal visible={this.state.visible}
                                                        width="1200"
