@@ -7,6 +7,7 @@ import './Showdata.css';
 import Showdataprovince from "../showdata/Showdataprovince";
 //import '../../server/app';
 import {ip,port} from "../setIP/setting";
+import style from "react-awesome-modal/lib/style";
 
 export default class Showdata extends Component{
     constructor() {
@@ -29,17 +30,24 @@ export default class Showdata extends Component{
         //console.log("after get data");
     }
 
-    todataup=(user)=>{
-        let url = `https://localhost:3000/dataup`;
-        sessionStorage.setItem('province', user.name_th)
-        localStorage.setItem('province', user.name_th)
-        let data = {
-            province:user.name_th
+    myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
         }
-        axios.get(url,data)
-        setTimeout(()=>{this.componentDidMount()},1)
-        window.location='https://localhost:3000/Showdataprovince';
-    }
+      }
 
     getData = () => {
         console.log("before fetch data");
@@ -114,17 +122,22 @@ export default class Showdata extends Component{
 	this.closeModal();
         setTimeout(()=>{this.componentDidMount()},1)
     }
+
     render() {
         let {list} = this.state;
 
         return (
+
             <div className="App">
                 <h2 className="my-4">Users Information<br/></h2>
                 <hr/>
                 <div className="container p-3 my-3 bg-dark text-white">
-                    <table className="table table-dark">
+                    <div>
+                        <input type="text" id="myInput" placeholder="Search for names.." title="Type in a name"/>
+                    </div>
+                    <table className="table table-dark" id="myTable">
                         <thead>
-                            <tr>
+                            <tr class='header'>
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -141,13 +154,13 @@ export default class Showdata extends Component{
                                             <td>{user.id}</td>
                                             <td>{user.firstname}</td>
                                             <td>{user.lastname}</td>
-                                            <Link onClick={()=>this.todataup(user)}>
+                                            
                                             <td>{user.name_th}</td>
-                                            </Link>
+                                            
                                             <td>{user.addby}</td>
                                             <td>{user.regis_time}</td>
-                                            <td width="10%"><button type="button" class="btn btn-warning btn-block" onClick={()=>this.call(user)}>Edit</button></td>
-                                            <td width="10%"><button type="button" class="btn btn-danger btn-block"  onClick={()=>this.onDelete(user)}>Delete</button></td>
+                                            <td><button type="button" class="btn btn-warning btn-block" onClick={()=>this.call(user)}>Edit</button></td>
+                                            <td><button type="button" class="btn btn-danger btn-block"  onClick={()=>this.onDelete(user)}>Delete</button></td>
                                             <div className="box">
                                                 <Modal visible={this.state.visible}
                                                        width="1200"
@@ -177,6 +190,7 @@ export default class Showdata extends Component{
                     </table>
                 </div><br/>
             </div>
+        
         );
     }
 }

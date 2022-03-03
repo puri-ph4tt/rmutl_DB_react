@@ -24,7 +24,7 @@ var httpsServer = https.createServer(credentials, app);
 //app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '172.26.128.1',
     port: '3306',
     user: 'phat',
     password: 'phat1234',
@@ -52,15 +52,6 @@ app.get('/dataprovince', function(req,res){
         res.json(result);
     });
     console.log("after query");
-});
-
-// show data by province
-app.get('/dataup', function(req, res) {
-    var sql = 'SELECT * FROM users u, province p WHERE p.name_th ='+localStorage.getItem('province');
-    db.query(sql,function (error, results) {
-        if(error) throw error;
-        console.log(req.body.province);
-    });
 });
 
 //delete
