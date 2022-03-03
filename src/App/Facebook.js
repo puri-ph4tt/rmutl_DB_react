@@ -6,6 +6,7 @@ import './style.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Register from "../register/Register";
 import Showdata from "../showdata/Showdata";
+import Showdataprovince from "../showdata/Showdataprovince";
 
 export default class Facebook extends Component {
   state = {
@@ -92,6 +93,7 @@ export default class Facebook extends Component {
             <Switch>
               <Route path='/register' component={Register} />
               <Route path='/showdata' component={Showdata} />
+              <Route path='/showdataprovince' component={Showdataprovince} />
             </Switch>
           </BrowserRouter>
         </div>

@@ -33,13 +33,34 @@ const db = mysql.createConnection({
 // show data
 app.get('/data', function(req,res){
     console.log("Hello in /data ");
-    let sql = 'SELECT * FROM users;';
+    let sql = 'SELECT u.id, u.firstname, u.lastname, u.addby, p.name_th, u.regis_time FROM users u, province p WHERE u.province_ID=p.province_ID ORDER BY u.id;';
     db.query(sql, (err, result)=>{
         if(err) throw err;
         console.log(result);
         res.json(result);
     });
     console.log("after query");
+});
+
+// show data province
+app.get('/dataprovince', function(req,res){
+    console.log("Hello in /dataprovince ");
+    let sql = 'SELECT * FROM province ORDER BY CONVERT (name_th USING tis620);';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+    console.log("after query");
+});
+
+// show data by province
+app.get('/dataup', function(req, res) {
+    var sql = 'SELECT * FROM users u, province p WHERE p.name_th ='+localStorage.getItem('province');
+    db.query(sql,function (error, results) {
+        if(error) throw error;
+        console.log(req.body.province);
+    });
 });
 
 //delete
@@ -67,7 +88,8 @@ app.post('/data', function(req, res){
         id:req.body.idkey,
         firstname:req.body.firstname,
         lastname:req.body.lastname,
-        addby:req.body.addby
+        addby:req.body.addby,
+        province_ID:req.body.province
     };
     let sql = 'INSERT INTO users SET ?';
     db.query(sql, data, (err, result)=>{

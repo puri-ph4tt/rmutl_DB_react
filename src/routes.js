@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import App from "./App";
 import Register from "./register/Register";
 import Showdata from "./showdata/Showdata";
+import Showdataprovince from "./showdata/Showdataprovince";
 
 export default class Routes extends Component{
     render() {

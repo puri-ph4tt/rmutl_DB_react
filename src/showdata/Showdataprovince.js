@@ -23,27 +23,15 @@ export default class Showdata extends Component{
         this.handleClicked = this.handleClicked.bind(this);
         //console.log("hello show data");
     }
-    componentDidMount() {
+    async componentDidMount() {
         //console.log("before get data");
         this.getData();
         //console.log("after get data");
     }
 
-    todataup=(user)=>{
-        let url = `https://localhost:3000/dataup`;
-        sessionStorage.setItem('province', user.name_th)
-        localStorage.setItem('province', user.name_th)
-        let data = {
-            province:user.name_th
-        }
-        axios.get(url,data)
-        setTimeout(()=>{this.componentDidMount()},1)
-        window.location='https://localhost:3000/Showdataprovince';
-    }
-
     getData = () => {
         console.log("before fetch data");
-        fetch('/data')
+        fetch('/dataup')
             .then(res => res.json())
             .then(list => this.setState({ list }))
         console.log("after fetch data");
@@ -125,10 +113,10 @@ export default class Showdata extends Component{
                     <table className="table table-dark">
                         <thead>
                             <tr>
-                            <th>ID</th>
+                            <th>ID{sessionStorage.getItem('province')}</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th >Province</th>
+                            <th>Province</th>
                             <th>Add by</th>
                             <th>Register time</th>
                             <th colspan="2">Action</th>
@@ -141,7 +129,7 @@ export default class Showdata extends Component{
                                             <td>{user.id}</td>
                                             <td>{user.firstname}</td>
                                             <td>{user.lastname}</td>
-                                            <Link onClick={()=>this.todataup(user)}>
+                                            <Link to={'./Showdataprovince'}>
                                             <td>{user.name_th}</td>
                                             </Link>
                                             <td>{user.addby}</td>
